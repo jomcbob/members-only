@@ -43,6 +43,7 @@
 .filters {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 20px 50px;
 }
@@ -57,12 +58,31 @@
 }
 
 .newMessage:hover,
-.newMessage:focus {
-    background-color: rgb(0, 0, 0, 0.2);
+.newMessage:focus,
+select:hover,
+select:focus {
+  background-color: rgb(0, 0, 0, 0.2);
 }
 
 .messageTop {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.noPosts {
+  font-size: large;
+  padding: 10px 20px;
+  background-color: #234C6A;
+  border-radius: 10px;
+  color: #E3E3E3;
+}
+
+select {
+  font-size: large;
+  padding: 5px 20px;
+  border: none;
+  color: #1B3C53;
+  background-color: rgb(0, 0, 0, 0.05);
+  border-radius: 5px;
 }

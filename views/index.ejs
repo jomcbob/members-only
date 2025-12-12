@@ -24,39 +24,61 @@
               <a class="newMessage" href="/messages/new">+ Message</a>
               <% } %>
           </div>
-          <div>filters</div>
+          <div class="filterDropdown">
+            <select id="linkSelect" onchange="if (this.value) window.location.href = this.value">
+              <option value="">Sort Posts</option>
+              <option value="/?filter=ascending">Oldest</option>
+              <option value="/?filter=descending">Newest</option>
+
+              <% if (user) { %>
+                <option value="/?filter=My-Posts">My posts</option>
+                <% } %>
+            </select>
+          </div>
         </div>
 
+        <% if (messages.length===0) { %>
+          <p class="noPosts">No posts yet. Go make one.</p>
+          <% } %>
 
-        <div class="messages">
-          <% messages.forEach(message=> { %>
-            <a class="message" href="/messages/<%= message.id %>">
-              <div class="messageTop">
-                <div>
-                  <% if (user && user.ismember) { %>
-                    Author: <%= message.username %>
-                      <% } else { %>
-                        Author: *******
-                        <% } %>
-                </div>
-                <div>
-                  <% if (user && user.ismember) { %>
+            <div class="messages">
+              <% messages.forEach(message=> { %>
+                <a class="message" href="/messages/<%= message.id %>">
+                  <div class="messageTop">
+                    <div>
+                      <% if (user && user.ismember) { %>
+                        Author: <%= message.username %>
+                          <% } else { %>
+                            Author: *******
+                            <% } %>
+                    </div>
+                    <div>
+                      <% if (user && user.ismember) { %>
                         <%= new Date(message.date).toDateString() %>
-                      <% } else { %>
-                        Published: *******
-                        <% } %>
-                </div>
-              </div>
-              <hr>
-              <div>
-                <%= message.title %>
-              </div>
-            </a>
-            <% }) %>
-        </div>
+                          <% } else { %>
+                            Published: *******
+                            <% } %>
+                    </div>
+                  </div>
+                  <hr>
+                  <div>
+                    <%= message.title %>
+                  </div>
+                </a>
+                <% }) %>
+            </div>
       </div>
 
   </div>
 </body>
+
+<script>
+  document.getElementById("linkSelect").addEventListener("change", function () {
+    const url = this.value;
+    if (url) {
+      window.location.href = url;
+    }
+  });
+</script>
 
 </html>

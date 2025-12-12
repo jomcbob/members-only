@@ -18,7 +18,6 @@ async function addUser(username, password, firstname, lastname) {
   }
 }
 
-
 async function addMessage(message, title, username) {
   const client = await pool.connect();
 
@@ -31,15 +30,29 @@ async function addMessage(message, title, username) {
     client.release();
 }
 
-async function getMessages() {
+async function getMessages(filter) {
   const client = await pool.connect();
 
     const { rows } = await client.query(
-    `SELECT * FROM messages ORDER BY date ASC`
+    `SELECT * FROM messages ${filter}`
   );
 
     client.release();
     return rows
+}
+
+async function getMessagesByUser(username) {
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query(
+      `SELECT * FROM messages WHERE username = $1`,
+      [username]
+    );
+
+    return rows;
+  } finally {
+    client.release();
+  }
 }
 
 async function dbGetMessageById(id) {
@@ -98,4 +111,5 @@ module.exports = {
   dbDeleteMessageById,
   makeAdmin,
   makeMember,
+  getMessagesByUser,
 };

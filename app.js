@@ -10,7 +10,7 @@ const { loginRouter } = require("./routes/loginRouter");
 const { logoutRouter } = require("./routes/logoutRouter");
 const { signupRouter } = require("./routes/signupRouter");
 const pool = require("./db/pool");
-const { getMessages } = require("./db/queries");
+const { getMessages, getMessagesByUser } = require("./db/queries");
 const { messageRouter } = require('./routes/messageRouter');
 const { isAuthenticated, isAdmin } = require("./controllers/loginController")
 
@@ -64,8 +64,21 @@ app.use((req, res, next) => {
 });
 
 app.get("/", async (req, res) => {
-  res.render("index", { title: "Home Page", messages: await getMessages() });
+  const filter = req.query.filter;
+  let messages;
+
+  if (filter === "My-Posts" && req.user) {
+    messages = await getMessagesByUser(req.user.username);
+  } else if (filter === "descending") {
+    messages = await getMessages("ORDER BY date DESC");
+  } else {
+    messages = await getMessages("ORDER BY date ASC");
+  }
+
+  res.render("index", { title: "Home Page", messages });
 });
+
+
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
 app.use("/signup", signupRouter);
