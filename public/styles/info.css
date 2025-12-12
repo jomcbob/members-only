@@ -1,0 +1,35 @@
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 20px;
+}
+
+.innerContainer {
+  width: min(600px, 95vw);
+  background-color: #456882;
+  color: #E3E3E3;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upgrade {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #234C6A;
+  color: #E3E3E3;
+  display: inline-block;
+  transition: transform .4s ease;
+}
+
+.upgrade:hover,
+.upgrade:focus {
+  background-color: #1B3C53;
+  transform: scale(1.067);
+}

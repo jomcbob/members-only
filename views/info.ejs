@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info</title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/info.css">
+
+</head>
+
+<body>
+  <%- include('partials/header', { links: [ { text: 'Home' , href: '/' }, ] }) %>
+    <div class="outerContainer">
+      <div class="innerContainer">
+        <h1>How This Club Works</h1>
+
+        <section>
+          <h2>Overview</h2>
+          <p>
+            This site lets people create an account, log in, post messages, and unlock extra features
+            by becoming a club member or an admin.
+          </p>
+        </section>
+
+        <section>
+          <h2>Account Types</h2>
+
+          <h3>Normal Users</h3>
+          <ul>
+            <li>Can create new messages</li>
+            <li>Can view all messages, but won’t see who wrote them or when</li>
+          </ul>
+          <% if (!user) { %>
+            <a class="upgrade" href="/signup">Become a User</a>
+            <% } %>
+
+              <h3>Club Members</h3>
+              <ul>
+                <li>Become a member by entering the secret passcode on the “Join the Club” page</li>
+                <li>Can see full message details (author + timestamp)</li>
+                <li>Keep all basic user abilities</li>
+              </ul>
+              <% if (user && !user.ismember) { %>
+                <a class="upgrade" href="/signup/member">Become a Member</a>
+                <% } %>
+
+                  <h3>Admins</h3>
+                  <ul>
+                    <li>Admins can see everything a member sees</li>
+                    <li>Admins can delete any message</li>
+                  </ul>
+                  <% if (user && !user.isadmin) { %>
+                    <a class="upgrade" href="/signup/admin">Become a Admin</a>
+                    <% } %>
+        </section>
+
+        <section>
+          <h2>What You See on the Site</h2>
+          <ul>
+            <li><strong>Create Message</strong>: visible only when logged in</li>
+            <li><strong>Author + Date</strong>: visible only to members and admins</li>
+            <li><strong>Delete Button</strong>: visible only to admins</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Your Current Status</h2>
+
+          <% if (!user) { %>
+            <p>You’re not logged in.</p>
+            <% } else { %>
+              <p>
+                Logged in as <strong>
+                  <%= user.username %>
+                </strong><br>
+                Membership: <strong>
+                  <%= user.ismember ? 'Member' : 'Not a Member' %>
+                </strong><br>
+                Admin Status: <strong>
+                  <%= user.isadmin ? 'Admin' : 'Not a Admin' %>
+                </strong>
+              </p>
+              <% } %>
+        </section>
+      </div>
+    </div>
+
+</body>
+
+</html>

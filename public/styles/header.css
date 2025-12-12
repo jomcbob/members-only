@@ -28,7 +28,7 @@ nav {
   padding: 10px 20px;
 }
 
-nav a {
+nav .header-link {
     display: inline-block;
   color: #E3E3E3;
   text-decoration: none;
@@ -38,12 +38,12 @@ nav a {
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-nav a:hover,
-nav a:focus {
+nav .header-link:hover,
+nav .header-link:focus {
   background-color: #1B3C53;
   transform: scale(1.1);
 }
 
-.status {
+.status a {
   color: rgb(255, 188, 100);
 }

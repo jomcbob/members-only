@@ -2,15 +2,22 @@ const pool = require("./pool");
 
 async function addUser(username, password, firstname, lastname) {
   const client = await pool.connect();
-
-  await client.query(
-    `INSERT INTO users (username, password, firstname, lastname, isMember, isAdmin)
-     VALUES ($1, $2, $3, $4, FALSE, FALSE)`,
-    [username, password, firstname, lastname]
-  );
-
+  try {
+    await client.query(
+      `INSERT INTO users (username, password, firstname, lastname, ismember, isadmin)
+       VALUES ($1, $2, $3, $4, FALSE, FALSE)`,
+       [username, password, firstname, lastname]
+    );
+  } catch (err) {
+    if (err.code === "23505") {
+      throw new Error("Username is already taken");
+    }
+    throw err;
+  } finally {
     client.release();
+  }
 }
+
 
 async function addMessage(message, title, username) {
   const client = await pool.connect();
@@ -54,10 +61,41 @@ async function dbDeleteMessageById(id) {
     client.release();
 }
 
+async function makeAdmin(userId) {
+  const client = await pool.connect();
+  try {
+    await client.query(
+      `UPDATE users
+       SET isadmin = TRUE,
+           ismember = TRUE
+       WHERE id = $1`,
+      [userId]
+    );
+  } finally {
+    client.release();
+  }
+}
+
+async function makeMember(userId) {
+  const client = await pool.connect();
+  try {
+    await client.query(
+      `UPDATE users
+       SET ismember = TRUE
+       WHERE id = $1`,
+      [userId]
+    );
+  } finally {
+    client.release();
+  }
+}
+
 module.exports = {
   addUser,
   addMessage,
   getMessages,
   dbGetMessageById,
   dbDeleteMessageById,
+  makeAdmin,
+  makeMember,
 };

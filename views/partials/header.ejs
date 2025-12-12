@@ -6,15 +6,19 @@
         <%= user ? "Logged in as" + " " + user.username : "Project: Members Only" %>
       </h2>
       <div class="status">
-        <% if (user && user.ismember) { %>
-          <% if (user && user.isadmin) { %>
-            Admin
+        <% if (user) { %>
+          <% if (user.isadmin) { %>
+            <a href="/signup/info#admin">Admin</a>
+            <% } else if (user.ismember) { %>
+              <a href="/signup/info#member">Member</a>
               <% } else { %>
-                Member
+                <a href="/signup/info#user">User</a>
                 <% } %>
                   <% } else { %>
-                    user
+                    <a href="/signup/info">Not logged in</a>
+
                     <% } %>
+
       </div>
     </div>
     <div class="headerLinks">

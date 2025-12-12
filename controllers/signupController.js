@@ -1,5 +1,6 @@
-const { addUser } = require("../db/queries");
+const { addUser, makeAdmin, makeMember } = require("../db/queries");
 const bcrypt = require("bcryptjs");
+const { render } = require("ejs");
 const { body, validationResult } = require("express-validator");
 
 
@@ -36,8 +37,49 @@ async function signupUserPost(req, res, next) {
   }
 }
 
+function renderInfoGet(req, res) {
+  res.render("info")
+}
+
+function renderBecomeMemberGet(req, res) {
+  res.render("upgradeStatus", { status: "member"})
+}
+
+function renderBecomeAdminGet(req, res) {
+  res.render("upgradeStatus", { status: "admin"})
+}
+
+async function signUpMemberPost(req, res) {
+    const { password, id } = req.body;
+
+  if (password !== process.env.MEMBER_PASS) {
+    return res.status(401).send("Password incorrect");
+  }
+
+  await makeMember(id)
+
+  res.redirect("/")
+}
+
+async function signUpAdminPost(req, res) {
+    const { password, id } = req.body;
+
+  if (password !== process.env.ADMIN_PASS) {
+    return res.status(401).send("Password incorrect");
+  }
+
+  await makeAdmin(id)
+
+  res.redirect("/")
+}
+
 module.exports = {
   renderSignupGet,
   signupUserPost,
   validateUser,
+  renderInfoGet,
+  renderBecomeMemberGet,
+  renderBecomeAdminGet,
+  signUpAdminPost,
+  signUpMemberPost,
 };

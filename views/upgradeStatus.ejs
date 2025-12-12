@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrade to <%= status %>
+  </title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/message.css">
+</head>
+
+<body>
+  <%- include('partials/header', { links: [ { text: 'Home' , href: '/' }, ] }) %>
+
+  <div class="messagesContent">
+      <div class="message heightMin">
+        <legend><h2>Upgrade to <%= status %></h2></legend>
+
+        <form method="post" action="/signup/<%= status %>">
+          <input type="hidden" id="id" name="id" value="<%= user.id %>">
+          <label for="password">Password</label>
+          <input type="text" id="password" name="password">
+          <button type="submit" class="submit">Submit</button>
+        </form>
+
+      </div>
+      </div>
+</body>
+
+</html>

@@ -81,7 +81,7 @@ app.listen(PORT, (error) => {
   if (error) {
     throw error;
   }
-  console.log(`My first Express app - listening on port ${PORT}!`);
+  console.log(`My Express app - listening on port ${PORT}!`);
 });
 
 app.use((err, req, res, next) => {
