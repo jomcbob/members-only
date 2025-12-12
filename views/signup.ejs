@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/login.css">
+</head>
+
+<body>
+  <%- include('partials/header', { links: [ { text: 'Home' , href: '/' }, ] }) %>
+
+
+    <div class="container">
+      <div class="buttons">
+        <a href="/login" class="notActive pageBtn">Log In</a>
+        <button class="active pageBtn">Make an account</button>
+      </div>
+
+      <%- include("partials/errors.ejs") %>
+
+      <form action="signup" method="post">
+        <div class="input">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input">
+          <label for="firstname">First Name:</label>
+          <input type="text" id="firstname" name="firstname" required autocomplete="given-name">
+        </div>
+        <div class="input">
+          <label for="lastname">Last Name:</label>
+          <input type="text" id="lastname" name="lastname" required autocomplete="family-name">
+        </div>
+        <div class="input">
+          <label for="password">Password:*</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="input">
+          <label for="confPassword">Confirm Password:</label>
+          <input type="password" id="confPassword" name="confPassword" required>
+        </div>
+        <button class="submit" type="submit">Sign Up</button>
+      </form>
+      <div>*password length must be between 1 and 20 letters</div>
+    </div>
+</body>
+
+</html>

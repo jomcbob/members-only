@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Post</title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/message.css">
+</head>
+
+<body>
+  <%- include('partials/header', { links: [ { text: 'Home' , href: '/' }, ] }) %>
+
+  <div class="messagesContent">
+    <div class="delete">
+      <div class="top">
+        <div>Are you sure you want to delete post</div> 
+        <strong class="strongTitle"><%= post.title %></strong>
+        <div>By: <%= post.username %>?</div> 
+      </div>
+      <div class="bottom">
+        <a id="deleteButton" class="bottomButtons" href="/messages/<%= post.id %>/delete/yes">yes im sure</a>
+        <a class="bottomButtons" href="/messages/<%= post.id %>">Cancel</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

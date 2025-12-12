@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/login.css">
+</head>
+
+<body>
+  <%- include('partials/header', { links: [ { text: 'Home' , href: '/' }, ] }) %>
+
+    <div class="container">
+      <form action="/messages/new" method="post">
+        <input type="hidden" name="username" id="username" value="<%= user.username %>">
+        <label for="title">Title</label>
+        <input maxlength="50" placeholder="Max 50 letters" type="text" name="title" id="title">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" placeholder="Your message here"></textarea>
+        <button class="submit" type="submit">Submit</button>
+      </form>
+    </div>
+</body>
+
+</html>

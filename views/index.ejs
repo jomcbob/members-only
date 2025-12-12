@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/index.css">
+</head>
+
+<body>
+  <div class="content">
+    <%- include('partials/header', { links: [ { text: user ? 'Log out' : 'Log in' , href: user ? '/logout' : '/login' }
+      ] }) %>
+
+      <div class="container">
+
+        <div class="filters">
+          <div>
+            <% if (user) { %>
+              <a class="newMessage" href="/messages/new">+ Message</a>
+              <% } %>
+          </div>
+          <div>filters</div>
+        </div>
+
+
+        <div class="messages">
+          <% messages.forEach(message=> { %>
+            <a class="message" href="/messages/<%= message.id %>">
+              <div class="messageTop">
+                <div>
+                  <% if (user && user.ismember) { %>
+                    Author: <%= message.username %>
+                      <% } else { %>
+                        Author: *******
+                        <% } %>
+                </div>
+                <div>
+                  <% if (user && user.ismember) { %>
+                        <%= new Date(message.date).toDateString() %>
+                      <% } else { %>
+                        Published: *******
+                        <% } %>
+                </div>
+              </div>
+              <hr>
+              <div>
+                <%= message.title %>
+              </div>
+            </a>
+            <% }) %>
+        </div>
+      </div>
+
+  </div>
+</body>
+
+</html>

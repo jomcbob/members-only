@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message</title>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <link rel="stylesheet" href="/styles/message.css">
+</head>
+
+<body>
+  <%- include('partials/header', { links: [ { text: 'Home' , href: '/' }, ] }) %>
+    <div class="content messagesContent">
+      <div class="flexRow widthMax">
+        <h3 class="title">
+          <%= post.title %>
+        </h3>
+        <% if (user && user.isadmin) { %>
+          <a class="trashCan" href="/messages/<%= post.id %>/delete">
+            <img height="30px" width="30px" src="/assets/trash.png" alt="">
+          </a>
+          <% } %>
+      </div>
+      <div class="message">
+        <div class="flexRow">
+          <div>
+            <strong>
+              <% if (user && user.ismember) { %>
+                Author: <%= post.username %>
+                  <% } else { %>
+                    Author: *******
+                    <% } %>
+            </strong>
+          </div>
+          <div class="date dateTopRight">
+            <strong>
+              <% if (user && user.ismember) { %>
+                <%= new Date(post.date).toDateString() %>
+                  <% } else { %>
+                    Published: *******
+                    <% } %>
+            </strong>
+          </div>
+        </div>
+        <hr>
+        <div class="flexRow widthMax">
+          －<%= post.message %>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

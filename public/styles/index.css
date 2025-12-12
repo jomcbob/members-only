@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+
+}
+
+.messages {
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem; 
+  width: 100%;
+  justify-content: center; 
+}
+
+.message {
+  align-self: center;
+  padding: 20px;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+  background-color: #456882;
+  color: #E3E3E3;
+  font-size: large;
+  width: 100%;
+  border-radius: 10px;
+  transition: transform .67s ease;
+  max-width: 550px;
+  height: 100%;
+  text-decoration: none;
+}
+
+.message:hover,
+.message:focus {
+  background-color: #234C6A;
+  box-shadow: inset .67rem 0 0 black;
+  border-radius: 0 10px 10px 0;
+  outline: none;
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 50px;
+}
+
+.newMessage {
+  text-decoration: none;
+  font-size: large;
+  color: #1B3C53;
+  background-color: rgb(0, 0, 0, 0.05);
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.newMessage:hover,
+.newMessage:focus {
+    background-color: rgb(0, 0, 0, 0.2);
+}
+
+.messageTop {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

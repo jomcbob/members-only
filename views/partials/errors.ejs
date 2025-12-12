@@ -1,0 +1,9 @@
+<% if (locals.errors) {%>
+  <link rel="stylesheet" href="/styles/globle.css">
+  <div class="errors">
+    <% errors.forEach(function(error) { %>
+      <div><%= error.msg %></div>
+      <hr>
+    <% }); %>
+  </div>
+<% } %>
